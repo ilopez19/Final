@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Isabel Final Project</title>
+	<script src="https://d3js.org/d3.v4.min.js"></script>
+	<link rel="stylesheet" href="pretty.css">
+
+</head>
+
+<body>
+
+	<body>
+		<nav class="navMenu">
+			<a href = "#intro1">Introduction</a>
+			<a href="#graph">Graphs</a>
+			<a href = "#writeit">Documentation</a>
+			<a href="#video">Video</a>
+		</nav>
+	</body>
+
+	
+<h2 id="vibes"> 
+
+		Hello! My Name is Isabel Lopez.
+	 Welcome to my Final Course Assigment in N328 Data Vizluization!
+
+</h2>
+<a id="intro1">
+
+
+
+<p id="intro">
+
+The State of Indiana offers data from The Deparement of Education (DOE). The data that I was able to pull was specifically for information on Free and Reduced Lunch. 
+In these graphs, you will be able to see a breakdown of some major information from the data. These graphs will walk you through my thought process. 
+
+The question I was trying to answer was <i> Do a majority of the students in Indiana receive Free or Paid lunch?
+</i>
+
+</br></br>
+Link to DOE Website:<a href = "https://www.in.gov/doe/it/data-center-and-reports/">Here!</a>
+</br></br>
+Link to Direct Data: <a href = "https://www.in.gov/doe/files/school-enrollment-ethnicity-and-free-reduced-price-meal-status-2006-21.xlsx">Here!</a>
+</p>
+</a>
+<a id=graph> 
+	<div id= "graphs"> 
+	<svg id="thisgraph" width="400" height="500">
+		<text id='label' x='30' y='30'> Ethnicity of Student by Percent in Indiana</text>
+		<g transform="translate(20,180)">
+
+		</g>
+	</svg>
+
+
+	<svg id="thisgraph2" width="400" height="600">
+		<text id='label2' x='20' y='100'>Schools with Top Latino Student in Indiana</text>
+		<g transform="translate(20,180)">
+		</g>
+
+
+	</svg>
+
+	<svg id="thisgraph3" width="600" height="500">
+		<text id='label1' x='40' y='100'> Latino Students who recieve Paid or 
+			 Free Lunch in Indiana
+			</text>
+		<g transform="translate(20,230)">
+		</g>
+	</svg>
+	<text id='small' x='10' y='10'>  <i> **The data above is pulled from the top ten schools with the most Latino population in Indiana Only**</i></text>
+
+
+	<svg id="thisgraph1" width="600" height="500">
+		<text id='label1' x='20' y='20'>Students who recieve Paid or
+			 Free Lunch in Indiana </text>
+
+		<g transform="translate(20,230)">
+		</g>
+	</svg>
+</div>
+</a>
+
+<a id="writeit">
+<div id="writeup"  > 
+	<h2> Write-up</h2>
+	<i> How did you go about designing the visualization?</i>
+	When thinking about how I would be designed, I wanted to make sure I added all the information I needed without taking away from the information. When it comes to this type of data, it can be important for stakeholders such as superintendents or other school-related high-ups to be in the know. I wanted to keep the design simple, but powerful.
+	<i>What are some of the initial designs/ideas you attempted in the beginning?  </i> 
+</br>
+	In the beginning, I wanted to do scatterplots but looking further into the data I realized it would be difficult since there was over 1000 line of data with several different school names and numbers. I later landed on bar graphs, again to get my point across easily, but also to ensure data was easy to interpret.
+	<i> The rationale of your design choices: This should be a rigorous explanation of the design choices you made. For example, why did you use color to encode a particular variable? Why did you arrange your charts in a particular way?</i>
+</br>
+	When it comes to my design like I mentioned before I wanted it to be simple and easy so others could interpret and understand it. The way I have the charts laid out is by telling a story. You can see that the first chart is talking about the ethnicity of all students in Indiana and the breakdown. The next graph talks about the top ten Latino high schools, and their percentages. I only showed the top ten, because they were the most significant and closest to 100%. The following graph gives you percentages related directly to the previous chart. The data from the previous chart was taken, and other columns from that same data were analyzed. The last charts are directly related to each other because they both talk about free and reduced lunch data but from different demographics. One is from strictly the top ten schools with the most Latinos and the following is from the whole data set.
+	These graphs help us understand that in Indiana, a majority of the student is white, and the last graph tells us that a majority of the student pay for their lunch. While the other two graphs take ethnicity and see how that compares to the other all population. You can see by the third graph that most Latino students receive free lunch.
+	
+</br>
+	<p> Want it as a word doc?<a href="Document.docx">Click here!</a>
+</p>
+
+</div>
+</a>
+<a id="video"><div id="vid">
+	<h2>Video</h2>
+	<div style="position: relative; padding-bottom: 56.25%; height: 0;">
+		<iframe src="https://www.loom.com/embed/69ca3ca3acf848f1bef931d6f481ab80" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen 
+		style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
+	</div>
+
+</div></a>
+
+
+
+
+
+
+
+
+
+
+
+	<script>
+
+		var barFree = 70;
+		var BAR_WIDTH = 30;
+		var MAX_BAR_HEIGHT = 200;
+		var BlackPeople = [];
+		var HispanicPeople = [];
+		var whitePeople = [];
+		var HispanicPeople1 = [];
+
+		function drawBarChart() {
+			console.log(BlackPeople)
+
+			var maxValue = d3.max(BlackPeople);
+			var selection = d3.select('#thisgraph').select('g').selectAll('rect').data(BlackPeople);
+			var rectangles = selection.enter().append('rect');
+
+			 rectangles.attr('width', BAR_WIDTH)
+
+			var x1 = rectangles.attr('x', function (d, i) {
+				return (i + 1) * BAR_WIDTH;
+			})
+
+			 rectangles.attr('height', function (d) {
+				var n = d / maxValue;
+				return n * MAX_BAR_HEIGHT;
+			});
+
+			var y1 = rectangles.attr('y', function (d) {
+				var n = 1 - (d / maxValue);
+				return n * MAX_BAR_HEIGHT;
+
+			});
+
+			console.log(rectangles);
+
+			d3.selectAll("rect")
+				.on("mouseover", function (event) {
+
+					console.log(this)
+
+					d3.select(this).style('fill', '#FFCB9A').style("transition", "fill 0.2s")
+				}).on("mouseout", function (event) {
+
+					d3.select(this).style('fill', '#D9B08C').text()
+
+
+				});
+
+
+			// create svg element
+			var svg = d3.select("#thisgraph")
+				.append("svg")
+				.attr("width", 1000)
+				.attr("height", 1000)
+
+			// Create the scale
+			var y = d3.scaleLinear()
+				.domain([0, 100])         // This is what is written on the Axis: from 0 to 100
+				.range([290, -25]);         // Note it is reversed
+
+			// Draw the axis
+			svg
+				.append("g")
+				.attr("transform", "translate(45,90)")      // This controls the vertical position of the Axis
+				.call(d3.axisLeft(y));
+
+
+			var x = d3.scaleBand()
+				.domain(["American Asian", "Asian", "Black", "Latino", "Multiracial", "Other", "White"])         // This is what is written on the Axis: from 0 to 100
+				.range([0, 215]);         // Note it is reversed
+
+			// Draw the axis
+			svg
+				.append("g")
+				.attr("transform", "translate(45,385)")      // This controls the rotate position of the Axis
+				.call(d3.axisBottom(x))
+				.selectAll("text")
+				.attr("transform", "translate(-12,09)rotate(-90)")
+				.style("text-anchor", "end")
+				.style("font-size", 10)
+				.style("fill", "#2C3531 ")
+
+			// Add Y axis label:
+			svg.append("text")
+				.attr("text-anchor", "end")
+				.attr("x", -200)
+				.attr("y", 10 + 5)
+				.text("Percentage")
+				.attr("transform", "rotate(-90)");
+
+			// X axis label:
+			svg.append("text")
+				.attr("text-anchor", "end")
+				.attr("transform", "rotate(0)")
+				.attr("y", 70 + 400)
+				.attr("x",170)
+				.text("Ethnicity")
+
+
+		}
+
+
+		function drawBarChartWhitePeople() {
+			console.log(whitePeople)
+
+			var maxValue = d3.max(whitePeople);
+			var selection = d3.select('#thisgraph1').select('g').selectAll('rect').data(whitePeople);
+			var rectangles = selection.enter().append('rect');
+
+			var width = rectangles.attr('width', barFree)
+
+			var x1 = rectangles.attr('x', function (d, i) {
+				return (i + 1) * barFree;
+			})
+
+			var height = rectangles.attr('height', function (d) {
+				var n = d / maxValue;
+				return n * MAX_BAR_HEIGHT;
+			});
+
+			var y1 = rectangles.attr('y', function (d) {
+				var n = 1 - (d / maxValue);
+				return n * MAX_BAR_HEIGHT;
+
+			});
+
+			console.log(rectangles);
+
+			d3.selectAll("rect")
+				.on("mouseover", function (event) {
+
+					console.log(this)
+
+					d3.select(this).style('fill', '#FFCB9A').style("transition", "fill 0.2s")
+				}).on("mouseout", function (event) {
+
+					d3.select(this).style('fill', '#D9B08C')
+
+				});
+			// create svg element
+			// create svg element
+			var svg = d3.select("#thisgraph1")
+				.append("svg")
+				.attr("width", 1000)
+				.attr("height", 1000)
+
+			// Create the scale
+			var y = d3.scaleLinear()
+				.domain([0, 100])         // This is what is written on the Axis: from 0 to 100
+				.range([290, -80]);         // Note it is reversed
+
+			// Draw the axis
+			svg
+				.append("g")
+				.attr("transform", "translate(70,140)")      // This controls the vertical position of the Axis
+				.call(d3.axisLeft(y));
+
+
+			var x = d3.scaleBand()
+				.domain(["Free", "Paid"])         // This is what is written on the Axis: from 0 to 100
+				.range([35, 200]);         // Note it is reversed
+
+			// Draw the axis
+			svg
+				.append("g")
+				.attr("transform", "translate(45,435)")      // This controls the rotate position of the Axis
+				.call(d3.axisBottom(x))
+				.selectAll("text")
+				.attr("transform", "translate(15,10)rotate(0)")
+				.style("text-anchor", "end")
+				.style("font-size", 10)
+				.style("fill", "#2C3531 ")
+
+			// Add Y axis label:
+				svg.append("text")
+				.attr("text-anchor", "end")
+				.attr("x", -200)
+				.attr("y", 30 + 5)
+				.text("Percentage")
+				.attr("transform", "rotate(-90)");
+
+			// // X axis label:
+			// svg.append("text")
+			// 	.attr("text-anchor", "end")
+			// 	.attr("transform", "rotate(0)")
+			// 	.attr("y", 70 + 400)
+			// 	.attr("x",170)
+			// 	.text("Ethnicity")	
+
+
+
+		}
+
+
+
+		function drawBarChartHispanicPeople() {
+			console.log(HispanicPeople)
+
+			var maxValue = d3.max(HispanicPeople);
+			var selection = d3.select('#thisgraph2').select('g').selectAll('rect').data(HispanicPeople);
+			var rectangles = selection.enter().append('rect');
+
+			var width = rectangles.attr('width', BAR_WIDTH)
+
+			var x1 = rectangles.attr('x', function (d, i) {
+				return (i + 1) * BAR_WIDTH;
+			})
+
+			var height = rectangles.attr('height', function (d) {
+				var n = d / maxValue;
+				return n * MAX_BAR_HEIGHT;
+			});
+
+			var y1 = rectangles.attr('y', function (d) {
+				var n = 1 - (d / maxValue);
+				return n * MAX_BAR_HEIGHT;
+			});
+
+			console.log(rectangles);
+
+			d3.selectAll("rect")
+				.on("mouseover", function (event) {
+
+					console.log(this)
+
+					d3.select(this).style('fill', '#FFCB9A').style("transition", "fill 0.2s")
+				}).on("mouseout", function (event) {
+
+					d3.select(this).style('fill', '#D9B08C')
+
+				});
+
+
+
+	
+
+
+			// create svg element
+			var svg = d3.select("#thisgraph2")
+				.append("svg")
+				.attr("width", 1000)
+				.attr("height", 1000)
+
+			// Create the scale
+			var y = d3.scaleLinear()
+				.domain([0, 100])         // This is what is written on the Axis: from 0 to 100
+				.range([290, 55]);         // Note it is reversed
+
+			// Draw the axis
+			svg
+				.append("g")
+				.attr("transform", "translate(45,90)")      // This controls the vertical position of the Axis
+				.call(d3.axisLeft(y));
+
+
+			var x = d3.scaleBand()
+				.domain(["Meredith Nicholson School 96", "Nathan Hale Elementary School", "Enlace Academy", "Whiting Middle School", "George Rogers Clark Md/HS", "Theodore Potter School 74", "Whiting High School", "Concord West Side Elem School", "Benjamin Franklin Elementary School", "Washington Irving Elementary School"])         // This is what is written on the Axis: from 0 to 100
+				.range([0, 305]);         // Note it is reversed
+
+			// Draw the axis
+			svg
+				.append("g")
+				.attr("transform", "translate(45,390)")      // This controls the rotate position of the Axis
+				.call(d3.axisBottom(x))
+				.selectAll("text")
+				.attr("transform", "translate(-5,15)rotate(-65)")
+				.style("text-anchor", "end")
+				.style("font-size", 10)
+				.style("fill", "#2C3531 ")
+
+
+
+					// Add Y axis label:
+				svg.append("text")
+				.attr("text-anchor", "end")
+				.attr("x", -200)
+				.attr("y", 10 + 5)
+				.text("Percentage")
+				.attr("transform", "rotate(-90)");
+
+			}
+
+
+			function drawBarChartWhitePeople1() {
+			console.log(HispanicPeople1)
+
+			var maxValue = d3.max(HispanicPeople1);
+			var selection = d3.select('#thisgraph3').select('g').selectAll('rect').data(HispanicPeople1);
+			var rectangles = selection.enter().append('rect');
+
+			var width = rectangles.attr('width', barFree)
+
+			var x1 = rectangles.attr('x', function (d, i) {
+				return (i + 1) * barFree;
+			})
+
+			var height = rectangles.attr('height', function (d) {
+				var n = d / maxValue;
+				return n * MAX_BAR_HEIGHT;
+			});
+
+			var y1 = rectangles.attr('y', function (d) {
+				var n = 1 - (d / maxValue);
+				return n * MAX_BAR_HEIGHT;
+
+			});
+
+			console.log(rectangles);
+
+			d3.selectAll("rect")
+				.on("mouseover", function (event) {
+
+					console.log(this)
+
+					d3.select(this).style('fill', '#FFCB9A').style("transition", "fill 0.2s")
+				}).on("mouseout", function (event) {
+
+					d3.select(this).style('fill', '#D9B08C')
+
+				});
+			// create svg element
+			// create svg element
+			var svg = d3.select("#thisgraph3")
+				.append("svg")
+				.attr("width", 1000)
+				.attr("height", 1000)
+
+			// Create the scale
+			var y = d3.scaleLinear()
+				.domain([0, 100])         // This is what is written on the Axis: from 0 to 100
+				.range([290, 10]);         // Note it is reversed
+
+			// Draw the axis
+			svg
+				.append("g")
+				.attr("transform", "translate(70,140)")      // This controls the vertical position of the Axis
+				.call(d3.axisLeft(y));
+
+
+			var x = d3.scaleBand()
+				.domain(["Free", "Paid"])         // This is what is written on the Axis: from 0 to 100
+				.range([35, 200]);         // Note it is reversed
+
+			// Draw the axis
+			svg
+				.append("g")
+				.attr("transform", "translate(45,435)")      // This controls the rotate position of the Axis
+				.call(d3.axisBottom(x))
+				.selectAll("text")
+				.attr("transform", "translate(15,10)rotate(0)")
+				.style("text-anchor", "end")
+				.style("font-size", 10)
+				.style("fill", "#2C3531 ")
+
+			// Add Y axis label:
+				svg.append("text")
+				.attr("text-anchor", "end")
+				.attr("x", -200)
+				.attr("y", 30 + 5)
+				.text("Percentage")
+				.attr("transform", "rotate(-90)");
+
+
+		}
+
+
+
+		d3.csv('data.csv', function (data) {
+
+			// loop through
+			for (var i = 0; i < 10; i++) {
+
+				// var dataname = data[i].Corp_Name;
+				var value = data[i].Perc;
+				var value1 = data[i].FreePaid;
+				var value2 = data[i].TopHis;
+				var value3 = data[i].Corp;
+				var value4 = data[i].TopHisFreePaid;
+
+				console.log(data[i].Corp_Name);
+				// console.log(dataname);
+
+
+				console.log(value);
+				// names.push(+dataname);
+				BlackPeople.push(+value);
+				HispanicPeople.push(+value2)
+				whitePeople.push(+value1);
+				HispanicPeople1.push(+value4);
+				// HispanicPeople.push(+A);
+				// whitePeople.push(+data[i].White);
+				// console.log(data[i].Black);
+				//  console.log(data[i].Age);
+			}
+
+			// console.log(dataname1);
+
+
+			drawBarChart();
+			drawBarChartHispanicPeople();
+			drawBarChartWhitePeople();
+			drawBarChartWhitePeople1();
+
+		});
+
+	</script>
+</body>
+
+
+</html>

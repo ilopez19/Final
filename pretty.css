@@ -1,0 +1,144 @@
+svg {
+    display: flex;
+    justify-content: center;
+  }
+
+
+#thisgraph{
+
+    display: flex;
+    justify-content: center;
+
+}
+
+
+#vid{
+
+  text-align: center;
+  padding: 10px;
+  color:  #2C3531;
+  border: 3px solid #116466;
+}
+
+#writeup{
+  text-align: center;
+  font-size: 20px;
+  color:  #FFCB9A;
+  background-color: #2C3531  ;
+  border: 3px solid #116466;
+  
+  padding: auto;
+}
+
+#small{
+
+  text-align: center;
+  font-size: 10px;
+  color:  #116466 ;
+  padding: 10px;
+
+}
+
+#intro{
+
+
+  text-align: center;
+  border: 3px solid #116466;
+  padding: 10px;
+  background-color: #D1E8E2 ;
+  padding-right: 300px;
+  padding-left: 300px;
+  text-indent: 50px;
+
+}
+
+#vibes{
+  /* padding-right: 300px;
+  padding-left: 300px; */
+font-family: Arial;
+    font-size: 20px;
+    /* text-align:justify; */
+    color:  #116466 ;
+    text-align: center;
+
+}
+text {
+    font-family: Arial;
+    font-size: 15px;
+    /* text-align:justify; */
+    color: #116466  ;
+    text-align: center;
+}
+
+.axis path,
+.axis line {
+    fill: none;
+    stroke: #FFCB9A;
+    shape-rendering: crispEdges;
+}
+
+
+#graphs{
+
+    align-content:center;
+    text-align: center;
+    border: 3px solid #116466;
+    padding-right: 300px;
+    padding-left: 300px;
+    
+}
+
+
+
+rect {
+    stroke: #116466 ;
+    fill: #D9B08C;
+}
+
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+body {
+  /* background: #272727; */
+  font-family: "Montserrat", sans-serif;
+}
+
+.navMenu {
+    text-align: center;
+  border: 3px solid #116466;
+  padding: 10px;
+
+}
+
+.navMenu a {
+  color: #D9B08C;
+  text-decoration: none;
+  font-size: 1.2em;
+  text-transform: uppercase;
+  font-weight: 500;
+  display: inline-block;
+  width: 150px;
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+}
+
+.navMenu a:hover {
+  color: #FFCB9A;
+}
+
+.navMenu .dot {
+  width: 6px;
+  height: 6px;
+  background: #D1E8E2;
+  border-radius: 50%;
+  opacity: 0;
+  -webkit-transform: translateX(30px);
+  transform: translateX(30px);
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+}
